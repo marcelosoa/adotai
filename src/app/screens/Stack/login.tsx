@@ -2,9 +2,9 @@ import { ActivityIndicator, Alert, Text, TouchableOpacity, View } from "react-na
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { InputComponent } from "@/components/input";
 import { ButtonComponent } from "@/components/button";
-import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
-import { formData } from "@/context/useAuthContext";
+import { useNavigation, NavigationContext } from "@react-navigation/native";
+import { useContext, useState,  } from "react";
+import { AuthContext, formData } from "@/context/useAuthContext";
 import { User, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "firebaseConfig";
 import { NavigationProps } from "@/types/types";
@@ -14,8 +14,8 @@ export function Login() {
   const [email, setEmail] = useState("");
   const [user, setUser] = useState<User | null>(null);
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false)
-  const navigation = useNavigation<NavigationProps>()
+  const [loading, setLoading]  = useState<boolean>(false)
+  const navigation = useContext(NavigationContext);
   const { togglePassword, visibility } = useTogglePassword()
 
   const signIn = async ({ email, password }: formData) => {
@@ -23,9 +23,9 @@ export function Login() {
     try {
       await signInWithEmailAndPassword(auth, email, password)
       setUser(user)
-      navigation.navigate('Main')
+      navigation?.navigate('Main')
     } catch (error) {
-      Alert.alert('Credenciais Inválidas')
+      Alert.alert(error.message)
     } finally {
       setLoading(false)
     }
@@ -56,10 +56,10 @@ export function Login() {
       />
 
         <View className="flex flex-row justify-between items-end w-full p-3">
-          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+          <TouchableOpacity onPress={() => navigation?.navigate('Register')}>
             <Text className="text-text">Cadastrar-se</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Recovery')}>
+          <TouchableOpacity onPress={() => navigation?.navigate('Recovery')}>
             <Text className="text-text">Perdeu Acesso?</Text>
           </TouchableOpacity>
         </View>
@@ -68,7 +68,7 @@ export function Login() {
         <ActivityIndicator color={"#000"} size={"small"} />
       ) : (
         <ButtonComponent onPress={() => signIn({email, password})}>
-          <Text>Conectar</Text>
+          <Text className="text-text">Conectar</Text>
         </ButtonComponent>
       )}
     </View>

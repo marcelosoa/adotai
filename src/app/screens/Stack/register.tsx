@@ -1,6 +1,7 @@
 import { ButtonComponent } from "@/components/button";
 import { InputComponent } from "@/components/input";
 import { AuthContext, formData } from "@/context/useAuthContext";
+import { useTogglePassword } from "@/hooks/useTogglePassword";
 import { NavigationProps } from "@/types/types";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -14,6 +15,8 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false)
+  const { togglePassword, visibility } = useTogglePassword()
+
   const navigation = useNavigation<NavigationProps>()
 
   const signUp = async ({ email, password }: formData) => {
@@ -36,15 +39,21 @@ export default function Register() {
         placeholder="Email"
         onChangeText={(email) => setEmail(email)}
         value={email}
+        secureTextEntry={false}
         startIcon={<MaterialCommunityIcons name="email-outline" size={20} />}
       />
 
       <InputComponent
         disabled={false}
         placeholder="Senha"
+        secureTextEntry={visibility}
         onChangeText={(password) => setPassword(password)}
         value={password}
-        endIcon={<MaterialCommunityIcons name="eye-outline" size={20} />}
+        endIcon={ visibility ? (
+          <MaterialCommunityIcons name="eye-outline" size={20} onPress={togglePassword}/>
+        ) :
+        <MaterialCommunityIcons name="eye-off-outline" size={20} onPress={togglePassword}/>
+        }
       />
 
       {loading ? (

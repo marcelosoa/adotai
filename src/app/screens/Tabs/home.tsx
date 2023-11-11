@@ -1,6 +1,5 @@
 import { ButtonComponent } from "@/components/button";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { Text, View } from "react-native";
 import { NavigationProps } from "@/types/types";
 import { auth } from "firebaseConfig";
@@ -18,7 +17,7 @@ export function Home() {
   }
 
   return (
-    <View>
+    <View className="flex-1 bg-background items-center justify-center">
       <Text>Home</Text>
       <ButtonComponent onPress={logout}>
         <Text>Voltar</Text>

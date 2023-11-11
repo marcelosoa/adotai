@@ -8,7 +8,7 @@ type ButtonProps = {
 export function ButtonComponent({ onPress, children, ...props }: ButtonProps) {
   return (
     <TouchableOpacity
-      className="bg-secondary/40 p-4 w-80 rounded-full mt-10 items-center flex active:bg-secondary/25 text-white"
+      className="bg-primary/60 p-4 w-80 rounded-full mt-10 items-center flex active:bg-secondary/25 shadow"
       onPress={onPress}
       {...props}
     >

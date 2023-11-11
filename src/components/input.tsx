@@ -24,7 +24,7 @@ export function InputComponent({
   ...props
 }: InputProps) {
   return (
-  <View className="flex items-center flex-row pt-1 pb-3 pl-1 gap-2 m-3 rounded-xl bg-secondary/40 border-spacing-1">
+  <View className="flex items-center flex-row pt-1 pb-3 pl-1 gap-2 m-3 rounded-xl bg-secondary/40 border-spacing-1 shadow">
       {startIcon}
       <TextInput
         className="flex-1 text-black text-sm items-center"
