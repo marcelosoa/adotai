@@ -1,7 +1,7 @@
-import { useNavigation } from "@react-navigation/native";
 import { User, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "firebaseConfig";
 import { ReactNode, createContext, useState } from "react";
+import React from "react";
 
 export type formData = {
   email: string
@@ -12,6 +12,7 @@ type AuthProps = {
   signIn: (data: formData) => void
   signUp: (data: formData) => void
   logout: () => void
+  loading: boolean
 }
 
 type ContextProps = {
@@ -23,16 +24,19 @@ export const AuthContext = createContext({} as AuthProps)
 
 
 function AuthProvider({ children }: ContextProps) {
-  const navigation = useNavigation()
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string>('')
 
   const signIn = async ({ email, password }: formData) => {
+    setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password)
       setUser(user)
-      navigation.navigate('Home')
     } catch (error) {
-      console.log(error)
+      setError(error?.message)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -40,7 +44,6 @@ function AuthProvider({ children }: ContextProps) {
     try {
       await createUserWithEmailAndPassword(auth, email, password)
       setUser(user)
-      navigation.navigate('Home')
     } catch (error) {
       console.log(error)
     }
@@ -52,13 +55,13 @@ function AuthProvider({ children }: ContextProps) {
     } catch (error) {
       alert(error)
     }
-    navigation.navigate('Login')
   }
 
   return (
     <AuthContext.Provider value={{
       signIn,
       signUp,
+      loading,
       logout,
     }}>
       {children}
