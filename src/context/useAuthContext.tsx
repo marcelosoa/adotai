@@ -1,3 +1,4 @@
+import { NavigationContext, useNavigation } from "@react-navigation/native";
 import { User, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "firebaseConfig";
 import { ReactNode, createContext, useState } from "react";
@@ -27,12 +28,14 @@ function AuthProvider({ children }: ContextProps) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string>('')
+  const navigation = React.useContext(NavigationContext);
 
   const signIn = async ({ email, password }: formData) => {
     setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password)
       setUser(user)
+      navigation?.navigate('Home')
     } catch (error) {
       setError(error?.message)
     } finally {
@@ -44,6 +47,7 @@ function AuthProvider({ children }: ContextProps) {
     try {
       await createUserWithEmailAndPassword(auth, email, password)
       setUser(user)
+      navigation?.navigate('Home')
     } catch (error) {
       console.log(error)
     }
@@ -52,6 +56,7 @@ function AuthProvider({ children }: ContextProps) {
   const logout = () => {
     try {
       auth.signOut()
+      navigation.navigate('Login')
     } catch (error) {
       alert(error)
     }

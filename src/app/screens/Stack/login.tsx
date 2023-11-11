@@ -2,16 +2,32 @@ import { ActivityIndicator, Alert, Text, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { InputComponent } from "@/components/input";
 import { ButtonComponent } from "@/components/button";
-import { useNavigation } from "@react-navigation/native";
-import { useContext, useState } from "react";
-import { AuthContext } from "@/context/useAuthContext";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext, formData } from "@/context/useAuthContext";
+import { User, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "firebaseConfig";
+import { NavigationProps } from "types/types";
 
 export function Login() {
   const [email, setEmail] = useState("");
+  const [user, setUser] = useState<User | null>(null);
   const [password, setPassword] = useState("");
-  const navigation = useNavigation();
+  const [loading, setLoading] = useState(false)
+  const navigation = useNavigation<NavigationProps>()
 
-  const { signIn, loading } = useContext(AuthContext);
+  const signIn = async ({ email, password }: formData) => {
+    setLoading(true);
+    try {
+      await signInWithEmailAndPassword(auth, email, password)
+      setUser(user)
+      navigation.navigate('Main')
+    } catch (error) {
+      Alert.alert(error?.message)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <View className="bg-background flex-1 items-center justify-center">
@@ -35,7 +51,7 @@ export function Login() {
         <ActivityIndicator color={"#000"} size={"small"} />
       ) : (
         <ButtonComponent onPress={() => signIn({email, password})}>
-          <Text>Criar conta</Text>
+          <Text>Conectar</Text>
         </ButtonComponent>
       )}
     </View>
