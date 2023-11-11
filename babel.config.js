@@ -4,17 +4,6 @@ module.exports = function(api) {
     presets: ['babel-preset-expo'],
     plugins: [
       "nativewind/babel",
-      ["module-resolver", {
-        "alias": {
-          "@components": "./src/components",
-        },
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".ts",
-          ".tsx",
-        ]
-      }]
     ]
   };
 };
