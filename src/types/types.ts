@@ -6,6 +6,8 @@ export type RoutesParamList = {
   Login: undefined,
   Profile: undefined
   Main: undefined
+  Register: undefined
+  Recovery: undefined
 }
 
 export type NavigationProps = StackNavigationProp<RoutesParamList>

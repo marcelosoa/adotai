@@ -6,6 +6,7 @@ type InputProps = {
   error?: string;
   disabled: boolean;
   startIcon?: ReactNode;
+  secureTextEntry: any
   endIcon?: ReactNode;
   onChangeText: (value: string) => void
   value: string;
@@ -18,6 +19,7 @@ export function InputComponent({
   startIcon,
   endIcon,
   onChangeText,
+  secureTextEntry,
   value,
   ...props
 }: InputProps) {
@@ -27,6 +29,7 @@ export function InputComponent({
       <TextInput
         className="flex-1 text-black text-sm items-center"
         placeholder={placeholder}
+        secureTextEntry={secureTextEntry}
         onChangeText={onChangeText}
         placeholderTextColor={"#000"}
         value={value}
