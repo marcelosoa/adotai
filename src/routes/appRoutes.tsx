@@ -13,6 +13,7 @@ import { Paw } from "@/app/screens/Tabs/paw";
 import { useEffect, useState } from "react";
 import { User, onAuthStateChanged } from "firebase/auth";
 import { auth } from "firebaseConfig";
+import { PawProfile } from "@/app/screens/Stack/[id]paw";
 
 export function AppRoutes() {
   const [user, setUser] = useState<User | null>(null)
@@ -37,16 +38,16 @@ export function AppRoutes() {
             fontSize: 12
           }
           }}>
-        <Tab.Screen name="Home" component={Home} options={{
+        <Tab.Screen name="Inicio" component={Home} options={{
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons  name="home" color={color} size={size}/>
         }}/>
         <Tab.Screen name="Adote" component={Paw} options={{
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons  name="paw" color={color} size={size}/>
         }}/>
-        <Tab.Screen name="Chat" component={Chat} options={{
+        <Tab.Screen name="Mensagens" component={Chat} options={{
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons  name="message-text" color={color} size={size}/>
         }} />
-        <Tab.Screen name="Profile" component={Profile} options={{
+        <Tab.Screen name="Perfil" component={Profile} options={{
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons  name="account" color={color} size={size}/>
         }} />
       </Tab.Navigator>
@@ -71,6 +72,7 @@ export function AppRoutes() {
           
           <Stack.Screen name="Initial" component={Login} />
           <Stack.Screen name="Register" component={Register} />
+          <Stack.Screen name="PawProfile" component={PawProfile}/>
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>

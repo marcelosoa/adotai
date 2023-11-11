@@ -9,6 +9,7 @@ export type RoutesParamList = {
   Register: undefined
   Recovery: undefined
   Initial: undefined
+  PawProfile: undefined
 }
 
 export type NavigationProps = StackNavigationProp<RoutesParamList>

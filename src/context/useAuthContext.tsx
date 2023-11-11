@@ -49,7 +49,7 @@ function AuthProvider({ children }: ContextProps) {
       setUser(user)
       navigation?.navigate('Home')
     } catch (error) {
-      console.log(error)
+      setError(error?.message)
     }
   }
 

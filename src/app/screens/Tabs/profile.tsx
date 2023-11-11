@@ -1,27 +1,16 @@
 import { Text, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AvatarComponent } from "@/components/avatar";
-import { auth } from "firebaseConfig";
-import { useNavigation } from "@react-navigation/native";
-import { NavigationProps } from "@/types/types";
-import { ButtonComponent } from "@/components/button";
+import { useContext } from "react";
+import { AuthContext } from "@/context/useAuthContext";
 
 export function Profile() {
-  const navigation = useNavigation<NavigationProps>()
-
-  const logout = () => {
-    try {
-      auth.signOut()
-      navigation.navigate('Login')
-    } catch (error) {
-      alert(error)
-    }
-  }
+  const { logout } = useContext(AuthContext)
 
   return (
     <View className="bg-background flex-1 items-center">
-      <View className="flex items-center justify-between w-full pl-7 pr-7 pt-16 flex-row">
-        <MaterialCommunityIcons name="exit-to-app" color={"#ff6d4d"} size={20} onPress={logout}/>
+      <View className="flex items-center w-full pl-7 pr-7 pt-16 flex-row justify-end">
+        <MaterialCommunityIcons name="exit-to-app" color={"#ff6d4d"} size={24} onPress={logout}/>
       </View>
 
       <View className="items-center">

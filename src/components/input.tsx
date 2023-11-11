@@ -10,6 +10,7 @@ type InputProps = {
   endIcon?: ReactNode;
   onChangeText: (value: string) => void
   value: string;
+  placeholderTextColor: string
 };
 
 export function InputComponent({
@@ -20,6 +21,7 @@ export function InputComponent({
   endIcon,
   onChangeText,
   secureTextEntry,
+  placeholderTextColor,
   value,
   ...props
 }: InputProps) {
@@ -31,7 +33,7 @@ export function InputComponent({
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
         onChangeText={onChangeText}
-        placeholderTextColor={"#000"}
+        placeholderTextColor={placeholderTextColor}
         value={value}
         autoCapitalize="none"
         {...props}
