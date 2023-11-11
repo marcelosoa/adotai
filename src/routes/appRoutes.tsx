@@ -8,6 +8,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Home } from "@/app/screens/Tabs/home";
 import { Profile } from "@/app/screens/Tabs/profile";
 import AuthProvider from "@/context/useAuthContext";
+import { Chat } from "@/app/screens/Tabs/chat";
+import { Paw } from "@/app/screens/Tabs/paw";
 
 export function AppRoutes() {
   const Stack = createNativeStackNavigator();
@@ -15,12 +17,26 @@ export function AppRoutes() {
 
   function MyTabs() {
     return (
-      <Tab.Navigator screenOptions={{ headerShown: false}}>
+      <Tab.Navigator screenOptions={{ 
+          headerShown: false, 
+          tabBarActiveTintColor: '#ff6d4d',
+          tabBarLabelStyle: {
+            backgroundColor: '#fafafa',
+            color: '#180202',
+            fontSize: 12
+          }
+          }}>
         <Tab.Screen name="Home" component={Home} options={{
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons  name="home" color={color} size={size}/>
         }}/>
+        <Tab.Screen name="Adote" component={Paw} options={{
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons  name="paw" color={color} size={size}/>
+        }}/>
+        <Tab.Screen name="Chat" component={Chat} options={{
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons  name="message-text" color={color} size={size}/>
+        }} />
         <Tab.Screen name="Profile" component={Profile} options={{
-          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons  name="home" color={color} size={size}/>
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons  name="account" color={color} size={size}/>
         }} />
       </Tab.Navigator>
     );

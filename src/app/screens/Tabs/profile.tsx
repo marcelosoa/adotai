@@ -1,9 +1,29 @@
 import { Text, View } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { AvatarComponent } from "@/components/avatar";
 
-export function Profile () {
+export function Profile() {
   return (
-    <View>
-      <Text>Profile</Text>
+    <View className="bg-background flex-1">
+      <View className="flex items-center justify-between w-full pl-7 pr-7 pt-16 flex-row">
+        <MaterialCommunityIcons name="exit-to-app" color={"#ff6d4d"} size={20}/>
+      </View>
+
+      <View className="items-center">
+        <AvatarComponent
+          size="large"
+          source={{
+            uri: 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRGCu3ETf6NPxGijCEaIvANw6fyshVbUJs42fXNSqNI0P_AmBBL'
+          }}
+        />
+        <Text className="text-text mt-6">Zeca Pagodinho</Text>
+      </View>
+
+      <View className="mt-4 items-center flex">
+        <Text className="text-text">Meus Pets</Text>
+
+      </View>
+
     </View>
-  )
+  );
 }
