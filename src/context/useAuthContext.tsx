@@ -56,7 +56,7 @@ function AuthProvider({ children }: ContextProps) {
   const logout = () => {
     try {
       auth.signOut()
-      navigation.navigate('Login')
+      navigation?.navigate('Initial')
     } catch (error) {
       alert(error)
     }

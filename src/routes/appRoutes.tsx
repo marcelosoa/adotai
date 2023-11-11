@@ -10,8 +10,19 @@ import { Profile } from "@/app/screens/Tabs/profile";
 import AuthProvider from "@/context/useAuthContext";
 import { Chat } from "@/app/screens/Tabs/chat";
 import { Paw } from "@/app/screens/Tabs/paw";
+import { useEffect, useState } from "react";
+import { User, onAuthStateChanged } from "firebase/auth";
+import { auth } from "firebaseConfig";
 
 export function AppRoutes() {
+  const [user, setUser] = useState<User | null>(null)
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setUser(user)
+    })
+  })
+
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
 
@@ -51,9 +62,15 @@ export function AppRoutes() {
           }}
           initialRouteName="Login"
         >
-          <Stack.Screen name="Login" component={Login} />
+          {user ? (
+            <Stack.Screen name="Main" component={MyTabs} />
+
+          ) : (
+            <Stack.Screen name="Login" component={Login} />
+          )}
+          
+          <Stack.Screen name="Initial" component={Login} />
           <Stack.Screen name="Register" component={Register} />
-          <Stack.Screen name="Main" component={MyTabs} />
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>
