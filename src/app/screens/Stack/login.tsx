@@ -37,6 +37,7 @@ export function Login() {
         disabled={false}
         onChangeText={(email) => setEmail(email)}
         placeholder="Email"
+        placeholderTextColor="#000"
         value={email}
         secureTextEntry={false}
         startIcon={<MaterialCommunityIcons name="email-outline" size={20} />}
@@ -47,6 +48,7 @@ export function Login() {
         secureTextEntry={visibility}
         onChangeText={(password) => setPassword(password)}
         placeholder="Password"
+        placeholderTextColor="#000"
         value={password}
         endIcon={ visibility ? (
           <MaterialCommunityIcons name="eye-outline" size={20} onPress={togglePassword}/>
@@ -68,7 +70,7 @@ export function Login() {
         <ActivityIndicator color={"#000"} size={"small"} />
       ) : (
         <ButtonComponent onPress={() => signIn({email, password})}>
-          <Text className="text-text">Conectar</Text>
+          <Text className="text-white">Conectar</Text>
         </ButtonComponent>
       )}
     </View>

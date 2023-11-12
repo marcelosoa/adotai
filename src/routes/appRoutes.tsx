@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { User, onAuthStateChanged } from "firebase/auth";
 import { auth } from "firebaseConfig";
 import { PawProfile } from "@/app/screens/Stack/[id]paw";
+import { Form } from "@/app/screens/Stack/form";
 
 export function AppRoutes() {
   const [user, setUser] = useState<User | null>(null)
@@ -72,7 +73,8 @@ export function AppRoutes() {
           
           <Stack.Screen name="Initial" component={Login} />
           <Stack.Screen name="Register" component={Register} />
-          <Stack.Screen name="PawProfile" component={PawProfile}/>
+          <Stack.Screen name="FormContact" component={Form} options={{ headerShown: true, headerTransparent: true, headerTitle: '' }}/>
+          <Stack.Screen name="PawProfile" component={PawProfile} options={{ headerShown: true, headerTransparent: true, headerTitle: '' }}/>
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>
