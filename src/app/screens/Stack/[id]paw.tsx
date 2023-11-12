@@ -17,21 +17,32 @@ export function PawProfile() {
 
       <View className="mt-2 p-2">
         <View className="flex justify-between flex-row">
-        <Text className="text-text font-bold text-3xl">{pet.name}</Text>
-        <MaterialCommunityIcons name="share" size={24} onPress={() => console.log('Compartilhara')}/>
-
+          <Text className="text-text font-bold text-3xl">{pet.name}</Text>
+          <View className="flex flex-row gap-4 items-center">
+            <MaterialCommunityIcons
+              name="message-text"
+              size={24}
+              onPress={() => navigation.navigate('Mensagens', {pet: pet})}
+            />
+            <MaterialCommunityIcons
+              name="share"
+              size={24}
+              onPress={() => console.log("Compartilhara")}
+            />
+          </View>
         </View>
 
         <View className="border-b-2 border-gray/70 h-10 flex justify-between flex-row mt-2">
           <Text> Localização: {pet.location} </Text>
           <View>
-          <Pressable
-            onPress={() => navigation.navigate("FormContact")}
-            className="bg-accent w-30 p-2 rounded-full shadow active:bg-primary/5"
-          >
-            <Text className="text-white/70 font-semibold">Entre em contato</Text>
-          </Pressable>
-
+            <Pressable
+              onPress={() => navigation.navigate("FormContact")}
+              className="bg-accent w-30 p-2 rounded-full shadow active:bg-primary/5"
+            >
+              <Text className="text-white/70 font-semibold">
+                Entre em contato
+              </Text>
+            </Pressable>
           </View>
         </View>
 

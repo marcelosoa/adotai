@@ -3,9 +3,16 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AvatarComponent } from "@/components/avatar";
 import { useContext } from "react";
 import { AuthContext } from "@/context/useAuthContext";
+import { firebase_store } from "firebaseConfig";
+import { addDoc, collection } from "firebase/firestore";
 
 export function Profile() {
   const { logout } = useContext(AuthContext)
+
+  const addNewPet = async () => {
+    const pet = addDoc(collection(firebase_store, 'pet'), {title: 'i am the test', done: false})
+    console.log('addpet:', pet)
+  }
 
   return (
     <View className="bg-background flex-1 items-center">
@@ -24,7 +31,7 @@ export function Profile() {
       </View>
 
       <View className="mt-4 items-center flex">
-        <Text className="text-text">Meus Pets</Text>
+        <Text className="text-text" onPress={addNewPet}>Meus Pets</Text>
 
       </View>
     </View>
