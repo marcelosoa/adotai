@@ -14,6 +14,9 @@ export type RoutesParamList = {
     pet: PetsProps
   }
   FormContact: undefined
+  Mensagens: {
+    pet: PetsProps
+  }
 }
 
 export type NavigationProps = StackNavigationProp<RoutesParamList>
@@ -21,3 +24,5 @@ export type NavigationProps = StackNavigationProp<RoutesParamList>
 export type HomeProp = RouteProp<RoutesParamList, 'Login'>
 
 export type PawProfile = RouteProp<RoutesParamList, 'PawProfile'>
+
+export type Mensagens = RouteProp<RoutesParamList, 'Mensagens'>
