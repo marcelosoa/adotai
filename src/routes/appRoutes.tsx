@@ -32,11 +32,13 @@ export function AppRoutes() {
     return (
       <Tab.Navigator screenOptions={{ 
           headerShown: false, 
-          tabBarActiveTintColor: '#ff6d4d',
+          tabBarActiveTintColor: '#508670',
+          tabBarStyle: {
+            backgroundColor: '#f7f2f4'
+          },
           tabBarLabelStyle: {
-            backgroundColor: '#fafafa',
-            color: '#180202',
-            fontSize: 12
+            color: '#160d11',
+            fontSize: 13,
           }
           }}>
         <Tab.Screen name="Inicio" component={Home} options={{
